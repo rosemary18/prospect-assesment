@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project created using create-react-app.
 
 ## Installation (Prospect Assesment)
 ### 1. Install front-end dependencies
