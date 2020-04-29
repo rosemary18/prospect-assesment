@@ -1,19 +1,28 @@
 import React, { Component } from "react";
-import DatePicker from "react-bootstrap-date-picker";
 export class OfficeForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      office_start_date: "",
+      name: "",
+      latitude: "",
+      longitude: "",
+      office_start_date: Date.now(),
+      company: "",
     };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+  onSubmit(e) {}
 
   render() {
     return (
       <div className="container">
         <h3 className="text-muted">Create Office</h3>
-        <form action="">
+        <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label htmlFor="name" className="text-muted">
               Name :
@@ -21,8 +30,11 @@ export class OfficeForm extends Component {
             <input
               type="text"
               id="name"
+              name="name"
               className="form-control"
               placeholder="Name"
+              value={this.state.name}
+              onChange={this.onChange}
             />
           </div>
           <div className="form-group">
@@ -33,14 +45,20 @@ export class OfficeForm extends Component {
               <input
                 type="text"
                 id="latitude"
+                name="latitude"
                 className="form-control mr-2"
                 placeholder="Latitude"
+                onChange={this.onChange}
+                value={this.state.latitude}
               />
               <input
                 type="text"
                 id="longitude"
+                name="longitude"
                 className="form-control"
                 placeholder="Longitude"
+                onChange={this.onChange}
+                value={this.state.longitude}
               />
             </div>
           </div>
@@ -48,18 +66,42 @@ export class OfficeForm extends Component {
             Office Start Date :
           </label>
           <div className="form-group">
-            <DatePicker />
+            <input
+              type="date"
+              className="form-control"
+              name="office_start_date"
+              id="office_start_date"
+              value={this.state.office_start_date}
+              onChange={this.onChange}
+            />
           </div>
-          <div class="form-group">
-            <label for="company" className="text-muted">
+          <div className="form-group">
+            <label htmlFor="company" className="text-muted">
               Company :
             </label>
-            <select class="form-control" id="company">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+            <select
+              className="form-control"
+              id="company"
+              name="company"
+              value={this.state.company}
+              onChange={this.onChange}
+            >
+              {this.props.companies !== null &&
+              this.props.companies.length > 0 ? (
+                <option value="" disabled>
+                  Choose company ..
+                </option>
+              ) : (
+                <option value="" disabled>
+                  Not yet company ..
+                </option>
+              )}
+
+              {this.props.companies !== null
+                ? this.props.companies.map((cmp) => (
+                    <option value={cmp._id}>{cmp.name}</option>
+                  ))
+                : null}
             </select>
           </div>
           <button

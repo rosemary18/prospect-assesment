@@ -26,7 +26,7 @@ router.get("/:id", async (req, res) => {
     const data = await Company.findById(req.params.id)
       .populate({
         path: "offices",
-        model: "tbl_office",
+        model: "tbl_offices",
       })
       .select();
     res.status(200).json(data);
@@ -54,12 +54,12 @@ router.post("/add", (req, res) => {
   newCompany
     .save()
     .then((result) => {
-      res.status(200).json({ msg: "success", data: result });
+      res.status(200).json({ msg: "success" });
     })
     .catch((err) => res.status(400).send(err));
 });
 
-// @Route update offices field
+/* // @Route update offices field
 router.put("/update/:id/:office_id", async (req, res) => {
   // Search the company
   await Company.findById(req.params.id)
@@ -71,6 +71,18 @@ router.put("/update/:id/:office_id", async (req, res) => {
     })
     //catching error
     .catch((err) => res.status(400).send(err));
+}); */
+
+// @Routes delete company
+router.delete("/delete/:id", (req, res) => {
+  Company.findById(req.params.id)
+    .then((cmp) => {
+      cmp
+        .remove()
+        .then((result) => res.status(200).json(result))
+        .catch((err) => res.status(400).json(err));
+    })
+    .catch((err) => res.status(400).json(err));
 });
 
 module.exports = router;

@@ -35,3 +35,33 @@ export const getCompany = (id) => (dispatch) => {
       })
     );
 };
+
+export const addCompany = (data) => (dispatch) => {
+  axios
+    .post("/api/company/add", data)
+    .then(() => {
+      alert("Add Company Succes!");
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
+
+export const delCompany = (id) => (dispatch) => {
+  dispatch(getCompanies());
+  axios
+    .delete(`/api/company/delete/${id}`)
+    .then(() => {
+      dispatch(getCompanies());
+      alert("Delete Company Succes!");
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
