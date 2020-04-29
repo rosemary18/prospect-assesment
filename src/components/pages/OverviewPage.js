@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 export class OverviewPage extends Component {
   render() {
-    console.log(this.props);
     return (
       <div
         className="container mt-4 mb-4 p-4 border"

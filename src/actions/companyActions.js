@@ -40,7 +40,7 @@ export const addCompany = (data) => (dispatch) => {
   axios
     .post("/api/company/add", data)
     .then(() => {
-      alert("Add Company Succes!");
+      alert("Add Company Success!");
     })
     .catch((err) => {
       dispatch({

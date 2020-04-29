@@ -48,6 +48,7 @@ export class CompanyForm extends Component {
               placeholder="Name"
               value={this.state.name}
               onChange={this.onChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -62,6 +63,7 @@ export class CompanyForm extends Component {
               placeholder="Address"
               value={this.state.address}
               onChange={this.onChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -76,6 +78,7 @@ export class CompanyForm extends Component {
               placeholder="Revenue"
               value={this.state.revenue}
               onChange={this.onChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -88,12 +91,16 @@ export class CompanyForm extends Component {
               name="phone"
               value={this.state.phone}
               onChange={(value) => this.setState({ phone: value })}
+              required
             />
           </div>
           <button
             type="submit"
             style={{ backgroundColor: "#dee2e6" }}
             className="btn btn-lg btn-block"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Submit"
           >
             Submit
           </button>

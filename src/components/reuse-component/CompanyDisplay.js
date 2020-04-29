@@ -8,8 +8,16 @@ export class CompanyDisplay extends Component {
   render() {
     const cmp = this.props.company;
     return (
-      <div className="col-sm-6">
-        <Link to="/company" style={{ textDecoration: "none", color: "#000" }}>
+      <div
+        className="col-sm-6"
+        data-toggle="tooltip"
+        data-placement="top"
+        title="Go to company details.."
+      >
+        <Link
+          to={`/company/${cmp._id}`}
+          style={{ textDecoration: "none", color: "#000" }}
+        >
           <div
             className="card rounded"
             style={{
@@ -29,7 +37,7 @@ export class CompanyDisplay extends Component {
                   onClick={() => this.props.delCompany(cmp._id)}
                   data-toggle="tooltip"
                   data-placement="top"
-                  title="Delete"
+                  title="Delete ?"
                 >
                   <h4>&times;</h4>
                 </Link>
@@ -42,6 +50,8 @@ export class CompanyDisplay extends Component {
                 <p className="text-muted">{cmp.revenue}</p>
                 <h6>Phone No :</h6>
                 <p className="text-muted">{cmp.phone}</p>
+                <h6>Offices :</h6>
+                <p className="text-muted">{cmp.offices.length} Places</p>
               </div>
             </div>
           </div>

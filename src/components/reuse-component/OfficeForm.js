@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addOffice } from "../../actions/officeActions";
+import PropTypes from "prop-types";
 export class OfficeForm extends Component {
   constructor(props) {
     super(props);
@@ -9,6 +12,7 @@ export class OfficeForm extends Component {
       longitude: "",
       office_start_date: Date.now(),
       company: "",
+      errors: {},
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -16,7 +20,16 @@ export class OfficeForm extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-  onSubmit(e) {}
+  onSubmit(e) {
+    const data = {
+      name: this.state.name,
+      latitude: this.state.latitude,
+      longitude: this.state.longitude,
+      office_start_date: this.state.office_start_date,
+      company: this.state.company,
+    };
+    this.props.addOffice(data);
+  }
 
   render() {
     return (
@@ -35,6 +48,7 @@ export class OfficeForm extends Component {
               placeholder="Name"
               value={this.state.name}
               onChange={this.onChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -43,22 +57,24 @@ export class OfficeForm extends Component {
             </label>
             <div className="d-flex flex-row">
               <input
-                type="text"
+                type="number"
                 id="latitude"
                 name="latitude"
                 className="form-control mr-2"
                 placeholder="Latitude"
                 onChange={this.onChange}
+                required
                 value={this.state.latitude}
               />
               <input
-                type="text"
+                type="number"
                 id="longitude"
                 name="longitude"
                 className="form-control"
                 placeholder="Longitude"
                 onChange={this.onChange}
                 value={this.state.longitude}
+                required
               />
             </div>
           </div>
@@ -73,6 +89,7 @@ export class OfficeForm extends Component {
               id="office_start_date"
               value={this.state.office_start_date}
               onChange={this.onChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -85,6 +102,7 @@ export class OfficeForm extends Component {
               name="company"
               value={this.state.company}
               onChange={this.onChange}
+              required
             >
               {this.props.companies !== null &&
               this.props.companies.length > 0 ? (
@@ -108,6 +126,9 @@ export class OfficeForm extends Component {
             type="submit"
             style={{ backgroundColor: "#dee2e6" }}
             className="btn btn-lg btn-block"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Submit"
           >
             Submit
           </button>
@@ -117,4 +138,8 @@ export class OfficeForm extends Component {
   }
 }
 
-export default OfficeForm;
+OfficeForm.propTypes = {
+  addOffice: PropTypes.func.isRequired,
+};
+
+export default connect(null, { addOffice })(OfficeForm);

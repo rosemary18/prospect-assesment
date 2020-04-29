@@ -13,7 +13,7 @@ export class App extends Component {
     return (
       <Router>
         <Route exact path="/" component={OverviewPage} />
-        <Route exact path="/company" component={OfficesPage} />
+        <Route exact path="/company/:company_id" component={OfficesPage} />
       </Router>
     );
   }

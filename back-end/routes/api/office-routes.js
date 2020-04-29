@@ -74,7 +74,7 @@ router.delete("/delete/:cmp_id/:office_id", (req, res) => {
             cmp.offices.splice(removeIndex, 1);
             cmp
               .save()
-              .then((result) => res.status(200).json(result))
+              .then((result) => res.status(200).json({ msg: "success" }))
               .catch((err) => res.status(400).json(err));
           });
         })
