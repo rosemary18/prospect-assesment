@@ -3,7 +3,7 @@ This project created using create-react-app.
 ## Installation (Prospect Assesment)
 
 ### 1. Install front-end dependencies
-
+Install redux extension on your browser.
 Clone this app use `git clone https://github.com/Rosemary18/prospect-assesment.git`.
 Run `npm install` in main folder.
 
